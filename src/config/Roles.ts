@@ -1,4 +1,4 @@
-enum roles {}
+enum roles { }
 /*
   add your roles here. E.g:
   

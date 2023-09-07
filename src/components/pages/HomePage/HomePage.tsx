@@ -1,7 +1,7 @@
 import { Box, flexbox } from '@mui/system';
-import logo from '../../logo1.png';
+import logo from '../../../logo1.png'
 
-export default function HomePage() {
+const HomePage = () => {
   return (
     <Box
       display='flex'
@@ -19,3 +19,5 @@ export default function HomePage() {
     </Box>
   );
 }
+
+export default HomePage;
