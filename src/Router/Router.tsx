@@ -31,12 +31,7 @@ const Router = () => {
         }
       />
 
-      <Route
-        path={"/blogs"}
-        element={
-          <PrivateRoute authorities={[]} element={<BlogPostPublicPage />}></PrivateRoute>
-        }
-      />
+      <Route path={"/blogs"} element={<BlogPostPublicPage />} />
       <Route
         path={"/blogposts"}
         element={
