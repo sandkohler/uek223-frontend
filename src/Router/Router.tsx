@@ -9,6 +9,7 @@ import BlogPostPage from "../components/pages/BlogPostPage/BlogPostPage";
 import AdminPage from "../components/pages/AdminPage/AdminPage";
 import UserHomePage from "../components/pages/HomePage/UserHomePage";
 import BlogPostPublicPage from "../components/pages/BlogPostPage/BlogPostPublicPage";
+import Register from "../components/pages/RegisterPage/RegisterPage";
 
 /**
  * Router component renders a route switch with all available pages
@@ -23,6 +24,7 @@ const Router = () => {
     <Routes>
       <Route path={"/"} element={<HomePage />} />
       <Route path={"/login"} element={<LoginPage />} />
+      <Route path={"/register"} element={<Register />} />
 
       <Route
         path={"/home"}

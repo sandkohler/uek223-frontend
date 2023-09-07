@@ -1,7 +1,16 @@
 import { Box, flexbox } from '@mui/system';
 import logo from '../../../logo1.png'
+import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const UserHomePage = () => {
+  const btnstyle = { margin: '8px 0', outerWidth: '34%' };
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/blogposts');
+  }
+
   return (
     <Box
       display='flex'
@@ -9,13 +18,22 @@ const UserHomePage = () => {
       justifyContent='center'
       flexDirection={'column'}
     >
-      <h1>Welcome to the User Homepage</h1>
+      <h1>Welcome to the User Homepage of OurSpace</h1>
       <img
         src={logo}
         style={{ filter: 'invert(100%)' }}
         className='App-logo'
         alt='logo'
       />
+      <Button
+        type='submit'
+        color='primary'
+        variant='contained'
+        style={btnstyle}
+        onClick={handleClick}
+      >
+        Blog Posts
+      </Button>
     </Box>
   );
 }

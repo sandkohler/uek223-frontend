@@ -113,12 +113,12 @@ const Login = () => {
             </Form>
           )}
         </Formik>
-        <Typography>
+        {/* <Typography>
           <Link href='#'>Forgot password ?</Link>
-        </Typography>
+        </Typography> */}
         <Typography>
           {' '}
-          Do you have an account ?<Link href='#'>Sign Up</Link>
+          Do you have no account ? <Link href='/register'>Sign Up</Link>
         </Typography>
       </Paper>
     </Grid>
