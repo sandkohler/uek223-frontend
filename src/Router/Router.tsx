@@ -44,6 +44,12 @@ const Router = () => {
           <PrivateRoute authorities={[]} element={<BlogPostPage />}></PrivateRoute>
         }
       />
+      <Route
+        path={"/blogpostedit/:userId"}
+        element={
+          <PrivateRoute authorities={[]} element={<BlogPostPage />}></PrivateRoute>
+        }
+      />
 
       <Route
         path={"/admin"}
