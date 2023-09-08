@@ -17,11 +17,11 @@ const BlogPostTable = () => {
   }, []);
 
   const handleAdd = () => {
-    navigate('../blogpostedit/');
+    navigate('../blogedit/');
   };
 
   const handleEdit = (id: string) => {
-    navigate('../blogpostedit/' + id);
+    navigate('../blogedit/' + id);
   };
 
   const handleDelete = (id: string) => {

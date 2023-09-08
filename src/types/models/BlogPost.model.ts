@@ -5,6 +5,6 @@ export type BlogPost = {
     id: string;
     title: string;
     text: string;
-    author: User;
-    category: Category[];
+    user: User;
+    categoryId: Category[];
 };

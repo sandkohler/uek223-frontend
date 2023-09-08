@@ -12,13 +12,13 @@ const BlogPostService = {
     },
 
     addBlogPost: (blogPost: BlogPost) => {
-        return api.post('/blogs/addblogpost', blogPost).then((res) => {
+        return api.post('/blogs/', blogPost).then((res) => {
             return res.data;
         });
     },
 
     getAllBlogPosts: () => {
-        return api.get(`/blogs`);
+        return api.get('/blogs/');
     },
 
     deleteBlogPost: (id: string) => {

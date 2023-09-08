@@ -1,29 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useEffect, useState } from 'react';
 import { BlogPost } from '../../../types/models/BlogPost.model';
 import BlogPostService from '../../../Services/BlogPostService';
 import Card from '@mui/joy/Card/Card';
 import CardContent from '@mui/joy/CardContent/CardContent';
-import { useParams } from 'react-router-dom';
 import { Typography } from '@mui/material';
 
-const BlogPostPublicPage = () => {
-    const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
-    const { blogPostId } = useParams();
+const BlogPostsPublicPage = () => {
+    const [blopPosts, setBlogPosts] = useState<BlogPost[]>([]);
 
     useEffect(() => {
-        if (blogPostId) {
-            console.log(blogPostId)
-            BlogPostService.getBlogPost(blogPostId).then((data) => {
-                if (data) {
-                    setBlogPosts([data]);
-                }
-            });
-        }
-    }, [blogPostId]);
+        BlogPostService.getAllBlogPosts().then((data) => {
+            setBlogPosts(data.data);
+            console.log(data.data)
+        });
+    }, []);
 
     return (
         <>
-            {blogPosts.map((blogPost) => (
+            {blopPosts.map((blogPost) => (
                 <div key={blogPost.id}>
                     <Card sx={{ minWidth: 275 }}>
                         <CardContent>
@@ -44,4 +39,4 @@ const BlogPostPublicPage = () => {
     );
 };
 
-export default BlogPostPublicPage;
+export default BlogPostsPublicPage;

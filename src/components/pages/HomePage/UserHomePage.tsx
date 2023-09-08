@@ -6,9 +6,11 @@ import { useNavigate } from 'react-router-dom';
 const UserHomePage = () => {
   const btnstyle = { margin: '8px 0', outerWidth: '34%' };
   const navigate = useNavigate();
+  const userJSON = localStorage.getItem('user');
+  const user = userJSON ? JSON.parse(userJSON) : null;
 
   const handleClick = () => {
-    navigate('/blogposts');
+    navigate('/dashboard/' + user.id);
   }
 
   return (

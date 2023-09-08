@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { BlogPost } from '../../../types/models/BlogPost.model';
 import BlogPostService from '../../../Services/BlogPostService';
-import BlogPostForm from '../../molecules/BlogPostForm/UserForm';
+import BlogPostForm from '../../molecules/BlogPostForm/BlogPostForm';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const BlogPostPage = () => {
@@ -12,8 +12,8 @@ const BlogPostPage = () => {
     id: '',
     title: '',
     text: '',
-    author: { id: '', firstName: '', lastName: '', email: '', roles: [] },
-    category: [],
+    user: { id: '', firstName: '', lastName: '', email: '', roles: [] },
+    categoryId: [],
   });
 
   useEffect(() => {
@@ -29,11 +29,11 @@ const BlogPostPage = () => {
   const submitActionHandler = (values: BlogPost) => {
     if (blogPostId !== undefined) {
       BlogPostService.updateBlogPost(values).then(() => {
-        navigate('../blogposts');
+        navigate('../blogedit');
       });
     } else {
       BlogPostService.addBlogPost(values).then(() => {
-        navigate('/blogposts');
+        navigate('/blogedit');
       });
     }
   };

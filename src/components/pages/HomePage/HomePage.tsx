@@ -7,8 +7,12 @@ const HomePage = () => {
   const btnstyle = { margin: '8px 0', outerWidth: '34%' };
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleClickLogin = () => {
     navigate('/login');
+  }
+
+  const handleClickBlogs = () => {
+    navigate('/blogs');
   }
 
   return (
@@ -19,6 +23,15 @@ const HomePage = () => {
       flexDirection={'column'}
     >
       <h1>Welcome to the Homepage of OurSpace</h1>
+      <Button
+        type='submit'
+        color='primary'
+        variant='contained'
+        style={btnstyle}
+        onClick={handleClickBlogs}
+      >
+        Blogs
+      </Button>
       <img
         src={logo}
         style={{ filter: 'invert(100%)' }}
@@ -30,7 +43,7 @@ const HomePage = () => {
         color='primary'
         variant='contained'
         style={btnstyle}
-        onClick={handleClick}
+        onClick={handleClickLogin}
       >
         Login
       </Button>

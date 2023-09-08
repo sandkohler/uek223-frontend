@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import { Box, Button, TextField } from '@mui/material';
+import { Autocomplete, Box, Button, TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { object, string } from 'yup';
 import { BlogPost } from '../../../types/models/BlogPost.model';
@@ -15,10 +15,10 @@ const BlogPostForm = ({ blogPost, submitActionHandler }: BlogPostProps) => {
   const formik = useFormik({
     initialValues: {
       id: blogPost.id,
-      title: '',
-      text: '',
-      author: blogPost.author,
-      category: [],
+      title: blogPost ? blogPost.title : '',
+      text: blogPost ? blogPost.text : '',
+      user: blogPost ? blogPost.user : { id: '', email: '', firstName: '', lastName: '', roles: [] },
+      categoryId: blogPost ? blogPost.categoryId : [],
     },
     validationSchema: object({
       title: string().required().min(2).max(20),
@@ -27,6 +27,7 @@ const BlogPostForm = ({ blogPost, submitActionHandler }: BlogPostProps) => {
     }),
     onSubmit: (values: BlogPost) => {
       submitActionHandler(values);
+      console.log(values)
     },
     enableReinitialize: true,
   });
@@ -62,20 +63,13 @@ const BlogPostForm = ({ blogPost, submitActionHandler }: BlogPostProps) => {
           {formik.errors.text && formik.touched.text ? (
             <div style={{ color: 'red' }}>{formik.errors.text}</div>
           ) : null}
-          <TextField
-            id='category'
-            label='Category'
-            variant='outlined'
-            sx={{ paddingRight: '10px' }}
-            onBlur={formik.handleBlur}
-            onChange={formik.handleChange}
-            error={Boolean(formik.touched.category && formik.errors.category)}
-            value={formik.values.category}
+          <Autocomplete
+            disablePortal
+            id="category"
+            options={blogPost.categoryId.map(category => category.name)}
+            sx={{ width: 300 }}
+            renderInput={(params) => <TextField {...params} label="Category" />}
           />
-          {/* PLEASE FIX THAT */}
-          {/* {formik.errors.category && formik.touched.category ? (
-            <div style={{ color: 'red' }}>{formik.errors.category}</div>
-          ) : null} */}
         </Box>
         <div>
           <Button
