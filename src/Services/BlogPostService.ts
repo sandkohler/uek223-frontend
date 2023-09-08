@@ -3,7 +3,7 @@ import { BlogPost } from '../types/models/BlogPost.model';
 
 const BlogPostService = {
     getBlogPost: async (id: string): Promise<BlogPost> => {
-        const { data } = await api.get<BlogPost>(`/user/${id}`);
+        const { data } = await api.get<BlogPost>(`/blogs/${id}`);
         return data;
     },
 
