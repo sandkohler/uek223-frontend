@@ -48,7 +48,10 @@ const BlogPostTable = () => {
                   size='small'
                   color='error'
                   variant='contained'
-                  onClick={() => handleDelete(blogPost.id)}
+                  onClick={() => {
+                    handleDelete(blogPost.id)
+                    window.location.reload()
+                  }}
                 >
                   Delete
                 </Button>
