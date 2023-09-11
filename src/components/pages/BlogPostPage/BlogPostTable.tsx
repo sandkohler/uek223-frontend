@@ -22,12 +22,12 @@ const BlogPostTable = () => {
     navigate('../blogadd/');
   };
 
-  const handleEdit = (BlogPostId: string) => {
-    navigate('../blogedit/' + user.id + '/' + BlogPostId);
+  const handleEdit = (blogPostId: string) => {
+    navigate('../blogedit/' + user.id + '/' + blogPostId);
   };
 
-  const handleDelete = (BlogPostId: string) => {
-    BlogPostService.deleteBlogPost(BlogPostId);
+  const handleDelete = (blogPostId: string) => {
+    BlogPostService.deleteBlogPost(blogPostId);
   };
 
   return (
@@ -52,7 +52,6 @@ const BlogPostTable = () => {
                   variant='contained'
                   onClick={() => {
                     handleDelete(blogPost.id)
-                    window.location.reload()
                   }}
                 >
                   Delete
