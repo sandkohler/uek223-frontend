@@ -9,6 +9,8 @@ import { Button, Card, CardActions } from '@mui/material';
 const BlogPostTable = () => {
   const navigate = useNavigate();
   const [blopPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const userJSON = localStorage.getItem('user');
+  const user = userJSON ? JSON.parse(userJSON) : null;
 
   useEffect(() => {
     BlogPostService.getAllBlogPosts().then((data) => {
@@ -17,15 +19,15 @@ const BlogPostTable = () => {
   }, []);
 
   const handleAdd = () => {
-    navigate('../blogedit/');
+    navigate('../blogadd/');
   };
 
-  const handleEdit = (id: string) => {
-    navigate('../blogedit/' + id);
+  const handleEdit = (BlogPostId: string) => {
+    navigate('../blogedit/' + user.id + '/' + BlogPostId);
   };
 
-  const handleDelete = (id: string) => {
-    BlogPostService.deleteBlogPost(id);
+  const handleDelete = (BlogPostId: string) => {
+    BlogPostService.deleteBlogPost(BlogPostId);
   };
 
   return (

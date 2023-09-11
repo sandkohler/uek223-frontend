@@ -29,11 +29,11 @@ const BlogPostPage = () => {
   const submitActionHandler = (values: BlogPost) => {
     if (blogPostId !== undefined) {
       BlogPostService.updateBlogPost(values).then(() => {
-        navigate('../blogedit');
+        navigate('../blogs');
       });
     } else {
       BlogPostService.addBlogPost(values).then(() => {
-        navigate('/blogedit');
+        navigate('/blogs');
       });
     }
   };
