@@ -14,20 +14,22 @@ const BlogPostTable = () => {
 
   useEffect(() => {
     BlogPostService.getAllBlogPosts().then((data) => {
-      setBlogPosts(data.data);
-    });
-  }, []);
+      const userBlogPosts = data.data.filter((blogPost: BlogPost) => blogPost.user.id === user.id); // Nur BlogPosts welcher der User selbst erstellt hat werden angezeigt
+      setBlogPosts(userBlogPosts);
+    }).catch(error => { console.log(error + "Can't get BlogPosts") });
+  }, [user.id]);
+
 
   const handleAdd = () => {
     navigate('../blogadd/');
   };
 
   const handleEdit = (blogPostId: string) => {
-    navigate('../blogedit/' + user.id + '/' + blogPostId);
+    navigate('../blogedit/' + blogPostId);
   };
 
   const handleDelete = (blogPostId: string) => {
-    BlogPostService.deleteBlogPost(blogPostId);
+    BlogPostService.deleteBlogPostFromUser(blogPostId);
   };
 
   return (

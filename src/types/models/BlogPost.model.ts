@@ -6,5 +6,5 @@ export type BlogPost = {
     title: string;
     text: string;
     user: User;
-    categoryId: Category[];
+    categories: Category[];
 };

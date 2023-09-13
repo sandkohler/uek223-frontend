@@ -6,13 +6,14 @@ import UserTable from "../components/pages/UserPage/UserTable";
 import UserPage from "../components/pages/UserPage/UserPage";
 import BlogPostTable from "../components/pages/BlogPostPage/BlogPostTable";
 import BlogPostPage from "../components/pages/BlogPostPage/BlogPostPage";
-import AdminPage from "../components/pages/AdminPage/AdminPage";
 import UserHomePage from "../components/pages/HomePage/UserHomePage";
 import BlogPostPublicPage from "../components/pages/BlogPostPage/BlogPostPublicPage";
 import Register from "../components/pages/RegisterPage/RegisterPage";
 import BlogPostsPublicPage from "../components/pages/BlogPostPage/BlogPostsPublicPage";
 import SingleUser from "../components/pages/UserPage/SingleUser";
 import authorities from "../config/Authorities";
+import AdminTable from "../components/pages/AdminPage/AdminTable";
+import AdminPage from "../components/pages/AdminPage/AdminPage";
 /**
  * Router component renders a route switch with all available pages
  */
@@ -64,7 +65,7 @@ const Router = () => {
         }
       />
       <Route
-        path={"/blogedit/:userId/:blogPostId"}
+        path={"/blogedit/:blogPostId"}
         element={
           <PrivateRoute authorities={[
             { id: authorities.BLOG_MODIFY_BY_ID, name: authorities.BLOG_MODIFY_BY_ID },
@@ -90,6 +91,15 @@ const Router = () => {
       {/* Nur Admins haben auf diese Endpunkte zugriff */}
       <Route
         path={"/admin"}
+        element={
+          <PrivateRoute authorities={[
+            { id: authorities.USER_MODIFY, name: authorities.USER_MODIFY }
+          ]}
+            element={<AdminTable />}></PrivateRoute>
+        }
+      />
+      <Route
+        path={"/adminedit/:blogPostId"}
         element={
           <PrivateRoute authorities={[
             { id: authorities.USER_MODIFY, name: authorities.USER_MODIFY }

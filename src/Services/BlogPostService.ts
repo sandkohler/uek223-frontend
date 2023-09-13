@@ -7,23 +7,32 @@ const BlogPostService = {
         return data;
     },
 
-    updateBlogPost: (blogPost: BlogPost) => {
-        return api.put(`/blogs/${blogPost.id}`, blogPost);
+    getAllBlogPosts: () => {
+        return api.get('/blogs/');
     },
 
     addBlogPost: (blogPost: BlogPost) => {
         return api.post('/blogs/', blogPost).then((res) => {
             return res.data;
-        });
+        }).catch(error => { console.log(error + "Can't add BlogPost") });
     },
 
-    getAllBlogPosts: () => {
-        return api.get('/blogs/');
+    deleteBlogPostFromUser: (id: string) => {
+        return api.delete(`/blogs/${id}`);
+    },
+
+    updateBlogPostFromUser: (blogPost: BlogPost) => {
+        return api.put(`/blogs/${blogPost.id}`, blogPost);
     },
 
     deleteBlogPost: (id: string) => {
         return api.delete(`/blogs/${id}`);
     },
+
+    updateBlogPost: (blogPost: BlogPost) => {
+        return api.put(`/blogs/${blogPost.id}`, blogPost);
+    },
+
 };
 
 export default BlogPostService;

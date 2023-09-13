@@ -17,7 +17,7 @@ const BlogPostPublicPage = () => {
                 if (data) {
                     setBlogPosts([data]);
                 }
-            });
+            }).catch(error => { console.log(error + "Can't get BlogPost") });
         }
     }, [blogPostId]);
 
@@ -32,6 +32,9 @@ const BlogPostPublicPage = () => {
                             </Typography>
                             <Typography>
                                 Text: {blogPost.text}
+                            </Typography>
+                            <Typography>
+                                Category: {blogPost.categories.map(item => item.name)}
                             </Typography>
                             <Typography>
                                 By: {blogPost.user.firstName} {blogPost.user.lastName}

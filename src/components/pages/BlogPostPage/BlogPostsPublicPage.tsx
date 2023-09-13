@@ -30,7 +30,7 @@ const BlogPostsPublicPage = () => {
             const slicedPosts = sortedPosts.slice(startIndex, endIndex);
             setBlogPosts(slicedPosts);
             console.log(slicedPosts);
-        });
+        }).catch(error => { console.log(error + "Can't sort BlogPosts") });
     }, [currentPage, postsPerPage, sortBy, sortOrder]);
 
     const handleSortChange = (field: string) => {
@@ -87,9 +87,9 @@ const BlogPostsPublicPage = () => {
                             <Typography>
                                 By: {blogPost.user.firstName} {blogPost.user.lastName}
                             </Typography>
-                            {/*  <Typography>
-                                Text: {blogPost.categoryId.map(item => item.name)}
-                            </Typography> */}
+                            <Typography>
+                                Category: {blogPost.categories.map(item => item.name)}
+                            </Typography>
                             <Button
                                 variant="contained"
                                 onClick={() => handleClick(blogPost.id)}

@@ -13,7 +13,7 @@ const BlogPostPage = () => {
     title: '',
     text: '',
     user: { id: '', firstName: '', lastName: '', email: '', roles: [] },
-    categoryId: [],
+    categories: [],
   });
 
   useEffect(() => {
@@ -21,20 +21,20 @@ const BlogPostPage = () => {
       if (blogPostId) {
         BlogPostService.getBlogPost(blogPostId).then((res) => {
           return setBlogPost(res);
-        });
+        }).catch(error => { console.log(error + "Can't get BlogPost") });
       }
     };
   }, [blogPostId]);
 
   const submitActionHandler = (values: BlogPost) => {
     if (blogPostId !== undefined) {
-      BlogPostService.updateBlogPost(values).then(() => {
+      BlogPostService.updateBlogPostFromUser(values).then(() => {
         navigate('../blogs');
-      });
+      }).catch(error => { console.log(error + "Can't navigate to blogs") });
     } else {
       BlogPostService.addBlogPost(values).then(() => {
         navigate('/blogs');
-      });
+      }).catch(error => { console.log(error + "Can't navigate to blogs") });
     }
   };
 

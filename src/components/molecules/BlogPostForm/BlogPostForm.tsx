@@ -1,14 +1,11 @@
 import { useFormik } from 'formik';
-import { Autocomplete, Box, Button, TextField } from '@mui/material';
+import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { object, string } from 'yup';
 import { BlogPost } from '../../../types/models/BlogPost.model';
-
-const dummyCategories = [
-  { id: '1', name: 'Disney' },
-  { id: '2', name: 'Netflix' },
-  { id: '3', name: 'YouTube' },
-];
+import CategoryService from '../../../Services/CategoryService';
+import { useState, useEffect } from 'react';
+import { Category } from '../../../types/models/Category.model';
 
 interface BlogPostProps {
   blogPost: BlogPost;
@@ -16,7 +13,14 @@ interface BlogPostProps {
 }
 
 const BlogPostForm = ({ blogPost, submitActionHandler }: BlogPostProps) => {
+  const [categories, setCategories] = useState<Category[]>([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    CategoryService.getAllCategories().then((data) => {
+      setCategories(data.data);
+    }).catch(error => { console.log(error + "Can't get Categories") });
+  }, [])
 
   const formik = useFormik({
     initialValues: {
@@ -24,16 +28,16 @@ const BlogPostForm = ({ blogPost, submitActionHandler }: BlogPostProps) => {
       title: blogPost.title || '',
       text: blogPost.text || '',
       user: blogPost.user || { id: '', email: '', firstName: '', lastName: '', roles: [] },
-      categoryId: blogPost.categoryId || [],
+      categories: blogPost.categories || [],
     },
     validationSchema: object({
       title: string().required().min(2).max(20),
       text: string().required().min(2).max(100),
     }),
-    onSubmit: (values: BlogPost) => {
+    onSubmit: (values) => {
       values.user.id = JSON.parse(localStorage.getItem('user') || '').id;
-      submitActionHandler(values);
-      console.log(values);
+      let cat = categories.find((e: any) => e.id === values.categories) // Approved by Luca
+      submitActionHandler({ ...values, categories: cat ? [cat] : [] });
     },
     enableReinitialize: true,
   });
@@ -69,13 +73,19 @@ const BlogPostForm = ({ blogPost, submitActionHandler }: BlogPostProps) => {
           {formik.errors.text && formik.touched.text ? (
             <div style={{ color: 'red' }}>{formik.errors.text}</div>
           ) : null}
-          <Autocomplete
-            disablePortal
-            id="category"
-            options={dummyCategories.map(category => category.name)}
-            sx={{ width: 300 }}
-            renderInput={(params) => <TextField {...params} label="Category" />}
-          />
+          <FormControl fullWidth>
+            <InputLabel>Choose Categorie</InputLabel>
+            <Select
+              displayEmpty
+              id="category"
+              value={formik.values.categories}
+              onChange={formik.handleChange}
+              name='categories'
+            >
+              <MenuItem value={""}></MenuItem>
+              {categories.map((cat) => (<MenuItem key={cat.id} value={cat.id}>{cat.name}</MenuItem>))}
+            </Select>
+          </FormControl>
         </Box>
         <div>
           <Button

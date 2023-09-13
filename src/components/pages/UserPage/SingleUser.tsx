@@ -16,7 +16,7 @@ const SingleUser = () => {
     if (userId) {
       UserService.getUser(userId).then((res) => {
         setUser(res);
-      });
+      }).catch(error => { console.log(error + "Can't get User") });
     }
   }, [userId]);
 
