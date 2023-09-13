@@ -11,17 +11,19 @@ const AuthorityService = {
     roles.forEach((role: Role) => {
       role.authorities.forEach((authority: Authority) => {
         authoritySet.add(authority.name);
+        // console.log(authority.name)
       });
     });
   },
   hasAuthority: (authority: Authority) => {
     AuthorityService.initAuthoritySet();
-    return authoritySet.has(authority);
+    //console.log(authority.name)
+    return authoritySet.has(authority.name);
   },
   hasAuthorities: (authorities: Authority[]) => {
     AuthorityService.initAuthoritySet();
     for (const element of authorities) {
-      if (!authoritySet.has(element)) {
+      if (!authoritySet.has(element.name)) { // Um auf den Namen der authority zuzugreifen
         return false;
       }
     }
@@ -29,7 +31,7 @@ const AuthorityService = {
   },
   hasAnyAuthority: (authorities: Authority[]) => {
     for (const element of authorities) {
-      if (authoritySet.has(element)) {
+      if (authoritySet.has(element.name)) {
         return true;
       }
     }

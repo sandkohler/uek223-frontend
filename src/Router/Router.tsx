@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import LoginPage from "../components/pages/LoginPage/LoginPage";
 import PrivateRoute from "./PrivateRoute";
 import HomePage from "../components/pages/HomePage/HomePage";
@@ -11,12 +11,20 @@ import UserHomePage from "../components/pages/HomePage/UserHomePage";
 import BlogPostPublicPage from "../components/pages/BlogPostPage/BlogPostPublicPage";
 import Register from "../components/pages/RegisterPage/RegisterPage";
 import BlogPostsPublicPage from "../components/pages/BlogPostPage/BlogPostsPublicPage";
-
+import SingleUser from "../components/pages/UserPage/SingleUser";
+import authorities from "../config/Authorities";
 /**
  * Router component renders a route switch with all available pages
  */
 
 const Router = () => {
+
+  const navigate = useNavigate();
+
+  const handleBackHome = () => {
+    navigate("/");
+  };
+
   //const { checkRole } = useContext(ActiveUserContext);
 
   /** navigate to different "home"-locations depending on Role the user have */
@@ -34,25 +42,48 @@ const Router = () => {
       <Route
         path={"/home"}
         element={
-          <PrivateRoute authorities={[]} element={<UserHomePage />}></PrivateRoute>
+          <PrivateRoute authorities={[
+            { id: authorities.DEFAULT, name: authorities.DEFAULT }
+          ]} element={<UserHomePage />}></PrivateRoute>
         }
       />
       <Route
         path={"/dashboard/:userId"}
         element={
-          <PrivateRoute authorities={[]} element={<BlogPostTable />}></PrivateRoute>
+          <PrivateRoute authorities={[
+            { id: authorities.BLOG_MODIFY_BY_ID, name: authorities.BLOG_MODIFY_BY_ID }
+          ]} element={<BlogPostTable />}></PrivateRoute>
         }
       />
       <Route
         path={"/blogadd"}
         element={
-          <PrivateRoute authorities={[]} element={<BlogPostPage />}></PrivateRoute>
+          <PrivateRoute authorities={[
+            { id: authorities.BLOG_CREATE, name: authorities.BLOG_CREATE }
+          ]} element={<BlogPostPage />}></PrivateRoute>
         }
       />
       <Route
         path={"/blogedit/:userId/:blogPostId"}
         element={
-          <PrivateRoute authorities={[]} element={<BlogPostPage />}></PrivateRoute>
+          <PrivateRoute authorities={[
+            { id: authorities.BLOG_MODIFY_BY_ID, name: authorities.BLOG_MODIFY_BY_ID },
+            { id: authorities.BLOG_DELETE_BY_ID, name: authorities.BLOG_DELETE_BY_ID }
+          ]} element={<BlogPostPage />}></PrivateRoute>
+        }
+      />
+      <Route
+        path={"/user/:userId"}
+        element={<PrivateRoute authorities={[
+          { id: authorities.USER_READ_BY_ID, name: authorities.USER_READ_BY_ID }
+        ]} element={<SingleUser />} />}
+      />
+      <Route
+        path="/useredit/:userId"
+        element={
+          <PrivateRoute authorities={[
+            { id: authorities.USER_MODIFY_SELF, name: authorities.USER_MODIFY_SELF }
+          ]} element={<UserPage />}></PrivateRoute>
         }
       />
 
@@ -60,27 +91,33 @@ const Router = () => {
       <Route
         path={"/admin"}
         element={
-          <PrivateRoute authorities={[]} element={<AdminPage />}></PrivateRoute>
+          <PrivateRoute authorities={[
+            { id: authorities.USER_MODIFY, name: authorities.USER_MODIFY }
+          ]}
+            element={<AdminPage />}></PrivateRoute>
         }
       />
       <Route
         path={"/users"}
-        element={<PrivateRoute authorities={[]} element={<UserTable />} />}
+        element={<PrivateRoute authorities={[
+          { id: authorities.USER_MODIFY, name: authorities.USER_MODIFY }
+        ]} element={<UserTable />} />}
       />
       <Route
         path="/useredit"
         element={
-          <PrivateRoute authorities={[]} element={<UserPage />}></PrivateRoute>
-        }
-      />
-      <Route
-        path="/useredit/:userId"
-        element={
-          <PrivateRoute authorities={[]} element={<UserPage />}></PrivateRoute>
+          <PrivateRoute authorities={[
+            { id: authorities.USER_MODIFY, name: authorities.USER_MODIFY }
+          ]} element={<UserPage />}></PrivateRoute>
         }
       />
 
-      <Route path="*" element={<div>Not Found</div>} />
+      <Route path="*" element={
+        <div>
+          <div>Not Found</div>
+          <button onClick={handleBackHome}>Back Home</button>
+        </div>
+      } />
     </Routes>
   );
 };

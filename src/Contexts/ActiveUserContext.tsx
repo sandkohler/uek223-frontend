@@ -151,8 +151,8 @@ export const ActiveUserContextProvider = ({
   const loadActiveUser = () => {
     return user
       ? UserService.getUser(user.id).then((res: any) => {
-          setActiveUser(res);
-        })
+        setActiveUser(res);
+      })
       : null;
   };
 

@@ -9,8 +9,12 @@ const UserHomePage = () => {
   const userJSON = localStorage.getItem('user');
   const user = userJSON ? JSON.parse(userJSON) : null;
 
-  const handleClick = () => {
+  const handleBlog = () => {
     navigate('/dashboard/' + user.id);
+  }
+
+  const handleUser = () => {
+    navigate('/user/' + user.id);
   }
 
   return (
@@ -21,6 +25,15 @@ const UserHomePage = () => {
       flexDirection={'column'}
     >
       <h1>Welcome to the User Homepage of OurSpace</h1>
+      <Button
+        type='submit'
+        color='primary'
+        variant='contained'
+        style={btnstyle}
+        onClick={handleUser}
+      >
+        User Profile
+      </Button>
       <img
         src={logo}
         style={{ filter: 'invert(100%)' }}
@@ -32,9 +45,9 @@ const UserHomePage = () => {
         color='primary'
         variant='contained'
         style={btnstyle}
-        onClick={handleClick}
+        onClick={handleBlog}
       >
-        Blog Posts
+        EDIT, DELETE & ADD Blog Posts
       </Button>
     </Box>
   );
