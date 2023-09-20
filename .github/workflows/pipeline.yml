@@ -4,3 +4,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Hello World!"
+  secret:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo $MY_SECRET
