@@ -7,4 +7,4 @@ jobs:
   secret:
     runs-on: ubuntu-latest
     steps:
-      - run: echo $MY_SECRET
+      - run: echo ${{ secrets.MY_SECRET }}
