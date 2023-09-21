@@ -7,6 +7,7 @@ jobs:
   secret:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - run: echo "${{ secrets.MY_SECRET }}"
   run-script:
     runs-on: ubuntu-latest
