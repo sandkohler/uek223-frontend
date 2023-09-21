@@ -1,7 +1,7 @@
 version: '3'
 services:
   frontend:
-    image: sandkohler/uek223-frontend
+    image: sandkohler/uek223-frontend:dev
     ports:
       - "8911:80"
     depends_on:
