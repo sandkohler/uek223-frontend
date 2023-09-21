@@ -12,7 +12,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: echo "echo Hello World!" > run.sh
-      - run: chmod +x ./run.sh
-      - run: ./run.sh
-      - run: ls -al
+      - run: chmod +x ./scripts/run.sh
+      - run: ./scripts/run.sh
