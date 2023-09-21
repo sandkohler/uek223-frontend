@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import api from "../config/Api";
 import roles from "../config/Roles";
 import AuthorityService from "../Services/AuthorityService";
@@ -83,7 +82,6 @@ export const ActiveUserContextProvider = ({
   // The following line defines the user state which is holding the user
   // data inside this context.
   const [user, setUser] = useState<Nullable<User>>(() => loadSavedUserData());
-  const navigate = useNavigate();
   /**
    * Update the user that is provided by the ActiveUserContext
    * @param updatedUser
@@ -121,7 +119,7 @@ export const ActiveUserContextProvider = ({
     // If a token is present send a logout-request and clear the localStorage afterwards
     api.get("/logout").finally(resetAuthorization);
     //navigate to login page
-    navigate("/login");
+    window.location.href = "/login";
   };
 
   /**
@@ -169,7 +167,7 @@ export const ActiveUserContextProvider = ({
     if (token !== null) {
       loadActiveUser();
     }
-  }, []);
+  });
 
   /**
    * If the user state is updated and the user is not equal to null,

@@ -1,0 +1,30 @@
+name: executing remote ssh commands using password
+on: [push]
+jobs:
+  remote-commands-ssh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: 22
+          script: | 
+            echo "Hello World"
+            ls -al
+            whoami
+  remote-commands-scp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        name: copy file via ssh password
+      - uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: 22
+          source: "./scripts/run.sh"
+          target: /home/sandro

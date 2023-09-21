@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import LoginPage from "../components/pages/LoginPage/LoginPage";
 import PrivateRoute from "./PrivateRoute";
 import HomePage from "../components/pages/HomePage/HomePage";
@@ -20,10 +20,8 @@ import AdminPage from "../components/pages/AdminPage/AdminPage";
 
 const Router = () => {
 
-  const navigate = useNavigate();
-
   const handleBackHome = () => {
-    navigate("/");
+      window.location.href = "/";
   };
 
   //const { checkRole } = useContext(ActiveUserContext);

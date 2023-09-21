@@ -1,7 +1,7 @@
-import { Box, flexbox } from '@mui/system';
-import Button from '@mui/material/Button/Button';
+import { Box } from '@mui/system';
 import logo from '../../../logo1.png'
 import { useNavigate } from 'react-router-dom';
+import {Button} from "@mui/material";
 
 const HomePage = () => {
   const btnstyle = { margin: '8px 0', outerWidth: '34%' };

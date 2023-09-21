@@ -2,16 +2,15 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { BlogPost } from '../../../types/models/BlogPost.model';
 import BlogPostService from '../../../Services/BlogPostService';
-import Card from '@mui/joy/Card/Card';
-import CardContent from '@mui/joy/CardContent/CardContent';
-import { Button, Typography } from '@mui/material';
+import {Button, Card, Typography} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import {CardContent} from "@mui/joy";
 
 const BlogPostsPublicPage = () => {
     const [blopPosts, setBlogPosts] = useState<BlogPost[]>([]);
     const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage, setPostsPerPage] = useState(3);
+    const postsPerPage= 3;
     const [sortBy, setSortBy] = useState("createdAt");
     const [sortOrder, setSortOrder] = useState("asc");
 
