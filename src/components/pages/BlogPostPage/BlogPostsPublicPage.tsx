@@ -2,9 +2,9 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { BlogPost } from '../../../types/models/BlogPost.model';
 import BlogPostService from '../../../Services/BlogPostService';
-import CardContent from '@mui/joy/CardContent/CardContent';
 import {Button, Card, Typography} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import {CardContent} from "@mui/joy";
 
 const BlogPostsPublicPage = () => {
     const [blopPosts, setBlogPosts] = useState<BlogPost[]>([]);
