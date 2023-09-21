@@ -1,10 +1,10 @@
-FROM node:16 AS builder
+FROM node:18 AS builder
 WORKDIR /app
 COPY package.json .
 COPY yarn.lock .
 RUN yarn install
 COPY . .
-RUN yarn build
+RUN yarn build --production
 
 FROM nginx:1.19.0
 WORKDIR /usr/share/nginx/html
