@@ -16,3 +16,4 @@ jobs:
       - run: ./run.sh
       - run: pwd
       - run: ls -la
+      - run: bash ${{ github.workspace }}/scripts/run.sh
