@@ -2,9 +2,8 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { BlogPost } from '../../../types/models/BlogPost.model';
 import BlogPostService from '../../../Services/BlogPostService';
-import Card from '@mui/joy/Card/Card';
 import CardContent from '@mui/joy/CardContent/CardContent';
-import { Button, Typography } from '@mui/material';
+import {Button, Card, Typography} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 const BlogPostsPublicPage = () => {
