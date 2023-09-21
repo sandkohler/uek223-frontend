@@ -11,7 +11,7 @@ const BlogPostsPublicPage = () => {
     const [blopPosts, setBlogPosts] = useState<BlogPost[]>([]);
     const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage, setPostsPerPage] = useState(3);
+    const postsPerPage= 3;
     const [sortBy, setSortBy] = useState("createdAt");
     const [sortOrder, setSortOrder] = useState("asc");
 
