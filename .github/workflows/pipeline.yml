@@ -14,11 +14,10 @@ jobs:
       - run: echo "echo Hello World!" > run.sh
       - run: chmod +x ./run.sh
       - run: ./run.sh
-      - run: pwd
-      - run: ls -la
-      - run: cd ..
-      - run: ls -la
-      - run: pwd
-      - run: cd ..
-      - run: ls -la
-      - run: pwd
+      - run: |
+          cd ..
+          ls -la
+          pwd
+          cd ..
+          ls -la
+          pwd
