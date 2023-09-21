@@ -169,7 +169,7 @@ export const ActiveUserContextProvider = ({
     if (token !== null) {
       loadActiveUser();
     }
-  }, []);
+  }, [loadActiveUser]);
 
   /**
    * If the user state is updated and the user is not equal to null,
