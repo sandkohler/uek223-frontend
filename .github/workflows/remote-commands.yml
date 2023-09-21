@@ -24,4 +24,4 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: 22
           source: "./scripts/run.sh"
-          target: .
+          target: .scripts
