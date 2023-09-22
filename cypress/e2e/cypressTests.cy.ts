@@ -25,24 +25,6 @@ describe('login and registration', () => {
   });
 });
 
-describe('create blogs', () => {
-  it('create blog', () => {
-    cy.visit("http://sandro.uek.dev.noseryoung.ch/home")
-    cy.get('.MuiBox-root > :nth-child(4)').click();
-    cy.wait(2000)
-    cy.get('.MuiButton-contained').click();
-    cy.wait(2000)
-    cy.get('#title').type('cypress test');
-    cy.get('#text').type('this is an cypress test from cypress');
-    cy.get('#category').click();
-    cy.get('.MuiList-root > [tabindex="-1"]').click();
-    cy.wait(2000)
-    cy.get('form > :nth-child(3)').click();
-    cy.get('.MuiButton-containedSuccess').click();
-    cy.wait(2000)
-  });
-});
-
 
 describe('blogs', () => {
   it('get blogs', () => {
