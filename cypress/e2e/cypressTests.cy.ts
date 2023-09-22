@@ -10,6 +10,7 @@ describe('login and registration', () => {
     cy.visit("http://sandro.uek.dev.noseryoung.ch/login")
     cy.wait(2000)
     cy.get('.MuiTypography-body1 > .MuiTypography-root').click();
+    cy.wait(1000)
     cy.get('h1').should('contain', 'Create an account!');
     cy.wait(2000)
     cy.visit("http://sandro.uek.dev.noseryoung.ch/login")
@@ -19,9 +20,14 @@ describe('login and registration', () => {
     cy.get('#email').should('have.value', 'admin@example.com');
     cy.get('#password').should('have.value', '1234');
     cy.wait(2000)
-
     cy.get('.MuiButtonBase-root').click();
     cy.wait(2000)
+  });
+});
+
+describe('create blogs', () => {
+  it('create blog', () => {
+    cy.visit("http://sandro.uek.dev.noseryoung.ch/home")
     cy.get('.MuiBox-root > :nth-child(4)').click();
     cy.wait(2000)
     cy.get('.MuiButton-contained').click();
@@ -33,8 +39,10 @@ describe('login and registration', () => {
     cy.wait(2000)
     cy.get('form > :nth-child(3)').click();
     cy.get('.MuiButton-containedSuccess').click();
+    cy.wait(2000)
   });
 });
+
 
 describe('blogs', () => {
   it('get blogs', () => {
